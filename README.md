@@ -13,7 +13,7 @@ mvn clean package -DskipTests=true
 
 ##修改jdbc配置，目前仅支持mysql
 
-
+````
 修改配置文件 /codegen/src/main/resources/codegen.properties
 
 内容
@@ -36,7 +36,7 @@ tablename=wd_region,wd_account,wd_activity,wd_coupon,wd_inside_message,wd_shop,w
 
 author=JianLin.Zhu    #作者名，可不填
 
-
+````
 ##运行codegen/CodeGenMain.java 
 
 日志

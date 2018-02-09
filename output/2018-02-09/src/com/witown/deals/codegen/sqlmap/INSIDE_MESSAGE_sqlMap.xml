@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="INSIDEMESSAGE">
+	<typeAlias alias="insidemessage" type="com.witown.deals.domain.InsideMessage" />
+	<sql id="BASE_COLUMNS">
+			id ,
+			type ,
+			title ,
+			content ,
+			sendTime ,
+			target ,
+			status ,
+			extra ,
+			gmtCreated ,
+			gmtModified 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="insidemessage">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_inside_message`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="insidemessage">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_inside_message
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="insidemessage">
+		INSERT INTO `wd_inside_message` (
+			id ,
+			type ,
+			title ,
+			content ,
+			sendTime ,
+			target ,
+			status ,
+			extra ,
+			gmtCreated ,
+			gmtModified 
+		)
+		VALUES
+		(
+			#id# ,
+			#type# ,
+			#title# ,
+			#content# ,
+			#sendTime# ,
+			#target# ,
+			#status# ,
+			#extra# ,
+			#gmtCreated# ,
+			#gmtModified# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateInsideMessageById"
+		parameterClass="insidemessage">
+		UPDATE wd_inside_message SET
+				gmtModified = now(),
+				<isNotNull property="id">id=#id#,</isNotNull>
+				<isNotNull property="type">type=#type#,</isNotNull>
+				<isNotNull property="title">title=#title#,</isNotNull>
+				<isNotNull property="content">content=#content#,</isNotNull>
+				<isNotNull property="sendtime">sendTime=#sendTime#,</isNotNull>
+				<isNotNull property="target">target=#target#,</isNotNull>
+				<isNotNull property="status">status=#status#,</isNotNull>
+				<isNotNull property="extra">extra=#extra#,</isNotNull>
+				<isNotNull property="gmtcreated">gmtCreated=#gmtCreated#,</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteInsideMessageById"
+		parameterClass="long">
+		delete from wd_inside_message where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

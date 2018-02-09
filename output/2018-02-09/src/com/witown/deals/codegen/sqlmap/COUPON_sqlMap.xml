@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="COUPON">
+	<typeAlias alias="coupon" type="com.witown.deals.domain.Coupon" />
+	<sql id="BASE_COLUMNS">
+			autoId ,
+			couponId ,
+			startTime ,
+			endTime ,
+			instructions ,
+			type ,
+			oldPrice ,
+			worth ,
+			shopId ,
+			gmtCreated ,
+			gmtModified ,
+			mobile ,
+			userId ,
+			title ,
+			status 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="coupon">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_coupon`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="coupon">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_coupon
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="coupon">
+		INSERT INTO `wd_coupon` (
+			autoId ,
+			couponId ,
+			startTime ,
+			endTime ,
+			instructions ,
+			type ,
+			oldPrice ,
+			worth ,
+			shopId ,
+			gmtCreated ,
+			gmtModified ,
+			mobile ,
+			userId ,
+			title ,
+			status 
+		)
+		VALUES
+		(
+			#autoId# ,
+			#couponId# ,
+			#startTime# ,
+			#endTime# ,
+			#instructions# ,
+			#type# ,
+			#oldPrice# ,
+			#worth# ,
+			#shopId# ,
+			#gmtCreated# ,
+			#gmtModified# ,
+			#mobile# ,
+			#userId# ,
+			#title# ,
+			#status# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateCouponById"
+		parameterClass="coupon">
+		UPDATE wd_coupon SET
+				gmtModified = now(),
+				<isNotNull property="autoid">autoId=#autoId#,</isNotNull>
+				<isNotNull property="couponid">couponId=#couponId#,</isNotNull>
+				<isNotNull property="starttime">startTime=#startTime#,</isNotNull>
+				<isNotNull property="endtime">endTime=#endTime#,</isNotNull>
+				<isNotNull property="instructions">instructions=#instructions#,</isNotNull>
+				<isNotNull property="type">type=#type#,</isNotNull>
+				<isNotNull property="oldprice">oldPrice=#oldPrice#,</isNotNull>
+				<isNotNull property="worth">worth=#worth#,</isNotNull>
+				<isNotNull property="shopid">shopId=#shopId#,</isNotNull>
+				<isNotNull property="gmtcreated">gmtCreated=#gmtCreated#,</isNotNull>
+				<isNotNull property="mobile">mobile=#mobile#,</isNotNull>
+				<isNotNull property="userid">userId=#userId#,</isNotNull>
+				<isNotNull property="title">title=#title#,</isNotNull>
+				<isNotNull property="status">status=#status#</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteCouponById"
+		parameterClass="long">
+		delete from wd_coupon where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

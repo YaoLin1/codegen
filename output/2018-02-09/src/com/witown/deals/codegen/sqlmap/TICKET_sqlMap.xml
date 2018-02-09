@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TICKET">
+	<typeAlias alias="ticket" type="com.witown.deals.domain.Ticket" />
+	<sql id="BASE_COLUMNS">
+			autoId ,
+			ticket ,
+			thridPartyTicket ,
+			userId ,
+			couponId ,
+			mobile ,
+			status ,
+			shopId ,
+			gmtCreated ,
+			gmtModified 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="ticket">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_ticket`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="ticket">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_ticket
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="ticket">
+		INSERT INTO `wd_ticket` (
+			autoId ,
+			ticket ,
+			thridPartyTicket ,
+			userId ,
+			couponId ,
+			mobile ,
+			status ,
+			shopId ,
+			gmtCreated ,
+			gmtModified 
+		)
+		VALUES
+		(
+			#autoId# ,
+			#ticket# ,
+			#thridPartyTicket# ,
+			#userId# ,
+			#couponId# ,
+			#mobile# ,
+			#status# ,
+			#shopId# ,
+			#gmtCreated# ,
+			#gmtModified# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateTicketById"
+		parameterClass="ticket">
+		UPDATE wd_ticket SET
+				gmtModified = now(),
+				<isNotNull property="autoid">autoId=#autoId#,</isNotNull>
+				<isNotNull property="ticket">ticket=#ticket#,</isNotNull>
+				<isNotNull property="thridpartyticket">thridPartyTicket=#thridPartyTicket#,</isNotNull>
+				<isNotNull property="userid">userId=#userId#,</isNotNull>
+				<isNotNull property="couponid">couponId=#couponId#,</isNotNull>
+				<isNotNull property="mobile">mobile=#mobile#,</isNotNull>
+				<isNotNull property="status">status=#status#,</isNotNull>
+				<isNotNull property="shopid">shopId=#shopId#,</isNotNull>
+				<isNotNull property="gmtcreated">gmtCreated=#gmtCreated#,</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteTicketById"
+		parameterClass="long">
+		delete from wd_ticket where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

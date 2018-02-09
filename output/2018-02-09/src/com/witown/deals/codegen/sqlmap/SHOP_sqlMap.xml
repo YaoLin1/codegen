@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SHOP">
+	<typeAlias alias="shop" type="com.witown.deals.domain.Shop" />
+	<sql id="BASE_COLUMNS">
+			id ,
+			merchantid ,
+			merchanturl ,
+			category ,
+			subcategory ,
+			city ,
+			cityname ,
+			area ,
+			areaname ,
+			bizarea ,
+			bizareaname ,
+			title ,
+			mainpic ,
+			description ,
+			address ,
+			phone ,
+			longitude ,
+			latitude ,
+			soldnum ,
+			productnum ,
+			minprice ,
+			maxprice ,
+			website ,
+			geohash ,
+			pinyintitle ,
+			relamerchants ,
+			isDelete ,
+			gmtCreated ,
+			gmtModified ,
+			mdpoutwebsite ,
+			treebearid 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="shop">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_shop`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="shop">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_shop
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="shop">
+		INSERT INTO `wd_shop` (
+			id ,
+			merchantid ,
+			merchanturl ,
+			category ,
+			subcategory ,
+			city ,
+			cityname ,
+			area ,
+			areaname ,
+			bizarea ,
+			bizareaname ,
+			title ,
+			mainpic ,
+			description ,
+			address ,
+			phone ,
+			longitude ,
+			latitude ,
+			soldnum ,
+			productnum ,
+			minprice ,
+			maxprice ,
+			website ,
+			geohash ,
+			pinyintitle ,
+			relamerchants ,
+			isDelete ,
+			gmtCreated ,
+			gmtModified ,
+			mdpoutwebsite ,
+			treebearid 
+		)
+		VALUES
+		(
+			#id# ,
+			#merchantid# ,
+			#merchanturl# ,
+			#category# ,
+			#subcategory# ,
+			#city# ,
+			#cityname# ,
+			#area# ,
+			#areaname# ,
+			#bizarea# ,
+			#bizareaname# ,
+			#title# ,
+			#mainpic# ,
+			#description# ,
+			#address# ,
+			#phone# ,
+			#longitude# ,
+			#latitude# ,
+			#soldnum# ,
+			#productnum# ,
+			#minprice# ,
+			#maxprice# ,
+			#website# ,
+			#geohash# ,
+			#pinyintitle# ,
+			#relamerchants# ,
+			#isDelete# ,
+			#gmtCreated# ,
+			#gmtModified# ,
+			#mdpoutwebsite# ,
+			#treebearid# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateShopById"
+		parameterClass="shop">
+		UPDATE wd_shop SET
+				gmtModified = now(),
+				<isNotNull property="id">id=#id#,</isNotNull>
+				<isNotNull property="merchantid">merchantid=#merchantid#,</isNotNull>
+				<isNotNull property="merchanturl">merchanturl=#merchanturl#,</isNotNull>
+				<isNotNull property="category">category=#category#,</isNotNull>
+				<isNotNull property="subcategory">subcategory=#subcategory#,</isNotNull>
+				<isNotNull property="city">city=#city#,</isNotNull>
+				<isNotNull property="cityname">cityname=#cityname#,</isNotNull>
+				<isNotNull property="area">area=#area#,</isNotNull>
+				<isNotNull property="areaname">areaname=#areaname#,</isNotNull>
+				<isNotNull property="bizarea">bizarea=#bizarea#,</isNotNull>
+				<isNotNull property="bizareaname">bizareaname=#bizareaname#,</isNotNull>
+				<isNotNull property="title">title=#title#,</isNotNull>
+				<isNotNull property="mainpic">mainpic=#mainpic#,</isNotNull>
+				<isNotNull property="description">description=#description#,</isNotNull>
+				<isNotNull property="address">address=#address#,</isNotNull>
+				<isNotNull property="phone">phone=#phone#,</isNotNull>
+				<isNotNull property="longitude">longitude=#longitude#,</isNotNull>
+				<isNotNull property="latitude">latitude=#latitude#,</isNotNull>
+				<isNotNull property="soldnum">soldnum=#soldnum#,</isNotNull>
+				<isNotNull property="productnum">productnum=#productnum#,</isNotNull>
+				<isNotNull property="minprice">minprice=#minprice#,</isNotNull>
+				<isNotNull property="maxprice">maxprice=#maxprice#,</isNotNull>
+				<isNotNull property="website">website=#website#,</isNotNull>
+				<isNotNull property="geohash">geohash=#geohash#,</isNotNull>
+				<isNotNull property="pinyintitle">pinyintitle=#pinyintitle#,</isNotNull>
+				<isNotNull property="relamerchants">relamerchants=#relamerchants#,</isNotNull>
+				<isNotNull property="isdelete">isDelete=#isDelete#,</isNotNull>
+				<isNotNull property="gmtcreated">gmtCreated=#gmtCreated#,</isNotNull>
+				<isNotNull property="mdpoutwebsite">mdpoutwebsite=#mdpoutwebsite#,</isNotNull>
+				<isNotNull property="treebearid">treebearid=#treebearid#</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteShopById"
+		parameterClass="long">
+		delete from wd_shop where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

@@ -7,8 +7,8 @@ package com.witown.deals.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import com.witown.deals.dao.${tableModel.domainName}Dao;
-import com.witown.deals.domain.${tableModel.domainName};
+{tableModel.domainName}Dao;
+        {tableModel.domainName};
 /**
  * 类${tableModel.domainName}DaoImpl的实现描述：${tableModel.tableChineseName}
  * @author ${author} ${tableModel.currentDate} ${tableModel.currentTime}

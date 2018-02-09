@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ACTIVITY">
+	<typeAlias alias="activity" type="com.witown.deals.domain.Activity" />
+	<sql id="BASE_COLUMNS">
+			autoId ,
+			actid ,
+			lanmu ,
+			url ,
+			title ,
+			content ,
+			pic ,
+			startTime ,
+			endTime ,
+			status ,
+			lastOperator ,
+			gmtLastModified ,
+			regionId ,
+			city ,
+			rank 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="activity">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_activity`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="activity">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_activity
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="activity">
+		INSERT INTO `wd_activity` (
+			autoId ,
+			actid ,
+			lanmu ,
+			url ,
+			title ,
+			content ,
+			pic ,
+			startTime ,
+			endTime ,
+			status ,
+			lastOperator ,
+			gmtLastModified ,
+			regionId ,
+			city ,
+			rank 
+		)
+		VALUES
+		(
+			#autoId# ,
+			#actid# ,
+			#lanmu# ,
+			#url# ,
+			#title# ,
+			#content# ,
+			#pic# ,
+			#startTime# ,
+			#endTime# ,
+			#status# ,
+			#lastOperator# ,
+			#gmtLastModified# ,
+			#regionId# ,
+			#city# ,
+			#rank# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateActivityById"
+		parameterClass="activity">
+		UPDATE wd_activity SET
+				gmtModified = now(),
+				<isNotNull property="autoid">autoId=#autoId#,</isNotNull>
+				<isNotNull property="actid">actid=#actid#,</isNotNull>
+				<isNotNull property="lanmu">lanmu=#lanmu#,</isNotNull>
+				<isNotNull property="url">url=#url#,</isNotNull>
+				<isNotNull property="title">title=#title#,</isNotNull>
+				<isNotNull property="content">content=#content#,</isNotNull>
+				<isNotNull property="pic">pic=#pic#,</isNotNull>
+				<isNotNull property="starttime">startTime=#startTime#,</isNotNull>
+				<isNotNull property="endtime">endTime=#endTime#,</isNotNull>
+				<isNotNull property="status">status=#status#,</isNotNull>
+				<isNotNull property="lastoperator">lastOperator=#lastOperator#,</isNotNull>
+				<isNotNull property="gmtlastmodified">gmtLastModified=#gmtLastModified#,</isNotNull>
+				<isNotNull property="regionid">regionId=#regionId#,</isNotNull>
+				<isNotNull property="city">city=#city#,</isNotNull>
+				<isNotNull property="rank">rank=#rank#</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteActivityById"
+		parameterClass="long">
+		delete from wd_activity where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

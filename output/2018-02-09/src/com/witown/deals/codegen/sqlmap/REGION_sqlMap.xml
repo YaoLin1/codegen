@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="REGION">
+	<typeAlias alias="region" type="com.witown.deals.domain.Region" />
+	<sql id="BASE_COLUMNS">
+			regionId ,
+			regionName ,
+			pid ,
+			showOrder ,
+			longitude ,
+			latitude ,
+			geohash ,
+			isCity ,
+			isArea ,
+			pinyinCode ,
+			arg0 ,
+			arg1 ,
+			gmtModified ,
+			gmtCreated 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="region">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_region`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="region">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_region
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="region">
+		INSERT INTO `wd_region` (
+			regionId ,
+			regionName ,
+			pid ,
+			showOrder ,
+			longitude ,
+			latitude ,
+			geohash ,
+			isCity ,
+			isArea ,
+			pinyinCode ,
+			arg0 ,
+			arg1 ,
+			gmtModified ,
+			gmtCreated 
+		)
+		VALUES
+		(
+			#regionId# ,
+			#regionName# ,
+			#pid# ,
+			#showOrder# ,
+			#longitude# ,
+			#latitude# ,
+			#geohash# ,
+			#isCity# ,
+			#isArea# ,
+			#pinyinCode# ,
+			#arg0# ,
+			#arg1# ,
+			#gmtModified# ,
+			#gmtCreated# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateRegionById"
+		parameterClass="region">
+		UPDATE wd_region SET
+				gmtModified = now(),
+				<isNotNull property="regionid">regionId=#regionId#,</isNotNull>
+				<isNotNull property="regionname">regionName=#regionName#,</isNotNull>
+				<isNotNull property="pid">pid=#pid#,</isNotNull>
+				<isNotNull property="showorder">showOrder=#showOrder#,</isNotNull>
+				<isNotNull property="longitude">longitude=#longitude#,</isNotNull>
+				<isNotNull property="latitude">latitude=#latitude#,</isNotNull>
+				<isNotNull property="geohash">geohash=#geohash#,</isNotNull>
+				<isNotNull property="iscity">isCity=#isCity#,</isNotNull>
+				<isNotNull property="isarea">isArea=#isArea#,</isNotNull>
+				<isNotNull property="pinyincode">pinyinCode=#pinyinCode#,</isNotNull>
+				<isNotNull property="arg0">arg0=#arg0#,</isNotNull>
+				<isNotNull property="arg1">arg1=#arg1#,</isNotNull>
+				<isNotNull property="gmtcreated">gmtCreated=#gmtCreated#</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteRegionById"
+		parameterClass="long">
+		delete from wd_region where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

@@ -5,9 +5,6 @@
  */
 package com.witown.deals.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-import org.apache.commons.lang.builder.ToStringBuilder;
 /**
  * 类${tableModel.domainName}的实现描述：${tableModel.tableChineseName}
  * 

@@ -1,12 +1,7 @@
 package com.witown.deals.service;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.witown.deals.dao.TestCaseBase;
-import com.witown.deals.domain.${tableModel.domainName};
-import com.witown.deals.service.${tableModel.domainName}Service;
+{tableModel.domainName};
+        {tableModel.domainName}Service;
 /**
  * 类${tableModel.domainName}ServiceTest.java的实现描述：${tableModel.domainName}Service单元测试
  * @author  ${author} ${tableModel.currentDate} ${tableModel.currentTime}

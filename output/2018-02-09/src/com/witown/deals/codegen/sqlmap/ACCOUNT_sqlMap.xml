@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ACCOUNT">
+	<typeAlias alias="account" type="com.witown.deals.domain.Account" />
+	<sql id="BASE_COLUMNS">
+			autoId ,
+			accountId ,
+			password ,
+			userName ,
+			role ,
+			gmtCreated ,
+			gmtModified ,
+			gmtLastLogin ,
+			lastLoginIP 
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="account">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `wd_account`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="account">
+		select
+			<include refid="BASE_COLUMNS" />
+			from wd_account
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="account">
+		INSERT INTO `wd_account` (
+			autoId ,
+			accountId ,
+			password ,
+			userName ,
+			role ,
+			gmtCreated ,
+			gmtModified ,
+			gmtLastLogin ,
+			lastLoginIP 
+		)
+		VALUES
+		(
+			#autoId# ,
+			#accountId# ,
+			#password# ,
+			#userName# ,
+			#role# ,
+			#gmtCreated# ,
+			#gmtModified# ,
+			#gmtLastLogin# ,
+			#lastLoginIP# 
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="updateAccountById"
+		parameterClass="account">
+		UPDATE wd_account SET
+				gmtModified = now(),
+				<isNotNull property="autoid">autoId=#autoId#,</isNotNull>
+				<isNotNull property="accountid">accountId=#accountId#,</isNotNull>
+				<isNotNull property="password">password=#password#,</isNotNull>
+				<isNotNull property="username">userName=#userName#,</isNotNull>
+				<isNotNull property="role">role=#role#,</isNotNull>
+				<isNotNull property="gmtcreated">gmtCreated=#gmtCreated#,</isNotNull>
+				<isNotNull property="gmtlastlogin">gmtLastLogin=#gmtLastLogin#,</isNotNull>
+				<isNotNull property="lastloginip">lastLoginIP=#lastLoginIP#</isNotNull>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="deleteAccountById"
+		parameterClass="long">
+		delete from wd_account where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

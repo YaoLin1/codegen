@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="${tableModel.sqlMapNamespace}">
+	<typeAlias alias="${tableModel.domainAlias}" type="com.witown.deals.domain.${tableModel.domainName}" />
+	<sql id="BASE_COLUMNS">
+		<#list tableModel.columnList as columnModel>
+			${columnModel.columnName} <#if columnModel_has_next>,</#if>
+		</#list>
+	</sql>
+
+	<select id="listAll" parameterClass="map" resultClass="${tableModel.domainAlias}">
+		SELECT
+		<include refid="BASE_COLUMNS" />
+		FROM `${tableModel.tableName}`
+		<include refid="Global.orderBy" />
+	</select>
+	
+	<select id="load" parameterClass="long" resultClass="${tableModel.domainAlias}">
+		select
+			<include refid="BASE_COLUMNS" />
+			from ${tableModel.tableName}
+			where autoId=#autoId#
+	</select>
+
+	<insert id="insert" parameterClass="${tableModel.domainAlias}">
+		INSERT INTO `${tableModel.tableName}` (
+		<#list tableModel.columnList as columnModel>
+			${columnModel.columnName} <#if columnModel_has_next>,</#if>
+		</#list>
+		)
+		VALUES
+		(
+		<#list tableModel.columnList as columnModel>
+			#${columnModel.columnName}# <#if columnModel_has_next>,</#if>
+		</#list>
+		)
+		<selectKey resultClass="long" keyProperty="autoId">
+			<![CDATA[ SELECT LAST_INSERT_ID() AS autoId  ]]>
+		</selectKey>
+	</insert>
+
+	<update id="update${tableModel.tableName2PascalWithoutPrefix}ById"
+		parameterClass="${tableModel.domainAlias}">
+		UPDATE ${tableModel.tableName} SET
+				gmtModified = now(),
+		<#list tableModel.columnList as columnModel>
+		       <#if columnModel.columnName != 'gmtModified'>
+				<isNotNull property="${columnModel.columnName2Camel}">${columnModel.columnName}=#${columnModel.columnName}#<#if columnModel_has_next>,</#if></isNotNull>
+			   </#if>
+		</#list>
+		 WHERE autoId=#autoId#
+	</update>
+	
+	<delete id="delete${tableModel.tableName2PascalWithoutPrefix}ById"
+		parameterClass="long">
+		delete from ${tableModel.tableName} where autoId=#autoId#
+	</delete>
+	
+</sqlMap>

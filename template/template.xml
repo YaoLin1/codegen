@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone = "yes"?>
+<!--  template的模版定义DTD -->
+<!DOCTYPE list[
+        <!ELEMENT list (templateInfo*)>
+        <!ELEMENT templateInfo (companyName,projectName,templateName,templateType,outputSubDir,isNeedDirPerFile,dirNameTypePerFile,outputFileExt,outputFilePrefix,outputFileSuffix,outputFileNameType,encoding)>
+        <!ELEMENT companyName (#PCDATA)>
+        <!ELEMENT projectName (#PCDATA)>
+        <!ELEMENT templateName (#PCDATA)>
+        <!ELEMENT templateType (#PCDATA)>
+        <!ELEMENT outputSubDir (#PCDATA)>
+        <!ELEMENT isNeedDirPerFile (#PCDATA)>
+        <!ELEMENT dirNameTypePerFile (#PCDATA)>
+        <!ELEMENT outputFileExt (#PCDATA)>
+        <!ELEMENT outputFilePrefix (#PCDATA)>
+        <!ELEMENT outputFileSuffix (#PCDATA)>
+        <!ELEMENT outputFileNameType (#PCDATA)>
+        <!ELEMENT encoding (#PCDATA)>
+   ]>
+<list>
+    <!-- ibatis的sql语句模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>SqlMapTemplate.xml</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>sqlmap</outputSubDir>
+		<isNeedDirPerFile>true</isNeedDirPerFile>
+		<dirNameTypePerFile>shortlower</dirNameTypePerFile>
+		<outputFileExt>xml</outputFileExt>
+		<outputFilePrefix></outputFilePrefix>
+		<modulePrefix>true</modulePrefix>
+		<outputFileSuffix>_sqlMap</outputFileSuffix>
+		<outputFileNameType>upper</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	<!-- Domain类模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>DomainTemplate.java</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>domain</outputSubDir>
+		<isNeedDirPerFile>false</isNeedDirPerFile>
+		<dirNameTypePerFile>camel</dirNameTypePerFile>
+		<outputFileExt>java</outputFileExt>
+		<modulePrefix>true</modulePrefix>
+		<outputFilePrefix></outputFilePrefix>
+		<outputFileSuffix></outputFileSuffix>
+		<outputFileNameType>pascal</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	<!-- Dao类模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>DaoTemplate.java</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>dao</outputSubDir>
+		<isNeedDirPerFile>false</isNeedDirPerFile>
+		<dirNameTypePerFile>camel</dirNameTypePerFile>
+		<outputFileExt>java</outputFileExt>
+		<modulePrefix>false</modulePrefix>
+		<outputFilePrefix></outputFilePrefix>
+		<outputFileSuffix>Dao</outputFileSuffix>
+		<outputFileNameType>pascal</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	<!-- DaoImpl类模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>DaoImplTemplate.java</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>dao/impl</outputSubDir>
+		<isNeedDirPerFile>false</isNeedDirPerFile>
+		<dirNameTypePerFile>camel</dirNameTypePerFile>
+		<outputFileExt>java</outputFileExt>
+		<modulePrefix>false</modulePrefix>
+		<outputFilePrefix></outputFilePrefix>
+		<outputFileSuffix>DaoImpl</outputFileSuffix>
+		<outputFileNameType>pascal</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	<!-- Service类模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>ServiceTemplate.java</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>service</outputSubDir>
+		<isNeedDirPerFile>false</isNeedDirPerFile>
+		<dirNameTypePerFile>camel</dirNameTypePerFile>
+		<outputFileExt>java</outputFileExt>
+		<modulePrefix>false</modulePrefix>
+		<outputFilePrefix></outputFilePrefix>
+		<outputFileSuffix>Service</outputFileSuffix>
+		<outputFileNameType>pascal</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	<!-- ServiceImpl类模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>ServiceImplTemplate.java</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>service/impl</outputSubDir>
+		<isNeedDirPerFile>false</isNeedDirPerFile>
+		<dirNameTypePerFile>camel</dirNameTypePerFile>
+		<outputFileExt>java</outputFileExt>
+		<modulePrefix>false</modulePrefix>
+		<outputFilePrefix></outputFilePrefix>
+		<outputFileSuffix>ServiceImpl</outputFileSuffix>
+		<outputFileNameType>pascal</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	<!-- ServiceTest类模版 -->
+	<templateInfo>
+		<companyName>witown</companyName>
+		<projectName>deals</projectName>
+		<templateName>ServiceTestTemplate.java</templateName>
+		<templateType>table</templateType>
+		<outputSubDir>service</outputSubDir>
+		<isNeedDirPerFile>false</isNeedDirPerFile>
+		<dirNameTypePerFile>camel</dirNameTypePerFile>
+		<outputFileExt>java</outputFileExt>
+		<modulePrefix>false</modulePrefix>
+		<outputFilePrefix></outputFilePrefix>
+		<outputFileSuffix>ServiceTest</outputFileSuffix>
+		<outputFileNameType>pascal</outputFileNameType>
+		<encoding>UTF-8</encoding>
+	</templateInfo>
+	
+</list>

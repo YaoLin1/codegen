@@ -2,16 +2,22 @@
 一款自定义模版（freemarker）的代码生成工具
 
 # 快速入门
+
 ## clone代码
 
+````
 git clone git@github.com:YaoLin1/codegen.git
+````
 
 ## 编译
+
 在codegen目录下执行编译命令
+
+````
 mvn clean package -DskipTests=true
+````
 
-
-##修改jdbc配置，目前仅支持mysql
+## 修改jdbc配置，目前仅支持mysql
 
 ````
 修改配置文件 /codegen/src/main/resources/codegen.properties
@@ -37,7 +43,7 @@ tablename=wd_region,wd_account,wd_activity,wd_coupon,wd_inside_message,wd_shop,w
 author=JianLin.Zhu    #作者名，可不填
 
 ````
-##运行codegen/CodeGenMain.java 
+## 运行codegen/CodeGenMain.java 
 
 日志
 
@@ -58,5 +64,5 @@ finish ServiceTestTemplate.java
 
 >Process finished with exit code 0
 
-##查看生成文件
+## 查看生成文件
 默认在codegen/output目录下文件，多次生成会覆盖原有代码
